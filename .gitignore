@@ -20,7 +20,7 @@ DerivedData
 *.o
 
 timeline.xctimeline
-.vscode
+# .vscode
 
 # CocoaPods
 #

@@ -1,0 +1,58 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "local",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/youtube_dl",
+            "console": "integratedTerminal",
+            "args": ["-F",  "https://www.ximalaya.com/erciyuan/238927/"]
+        },
+        {
+            "name": "zhihu",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/youtube_dl",
+            "console": "integratedTerminal",
+            "args": ["-F",  "https://www.zhihu.com/people/qingsanlang/posts"],
+            "pythonPath": "/usr/bin/python3"
+        },
+        {
+            "name": "hima",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/youtube_dl",
+            "console": "integratedTerminal",
+            "args": ["-F",  "http://www.ximalaya.com/61425525/sound/47740352/"]
+        },
+        {
+            "name": "bai",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/youtube_dl",
+            "console": "integratedTerminal",
+            "args": ["-F",  "https://www.ximalaya.com/renwenjp/221727/"]
+        },
+        {
+            "name": "kkk",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/youtube_dl",
+            "console": "integratedTerminal",
+            "args": ["-F",  "http://www.ximalaya.com/61425525/album/5534601/"]
+        },
+        {
+            "name": "gu",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/youtube_dl",
+            "console": "integratedTerminal",
+            "args": ["-F",  "https://www.ximalaya.com/renwenjp/221727/"],
+            "pythonPath": "/usr/bin/python3"
+        },
+    ]
+}
