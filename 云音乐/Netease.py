@@ -96,7 +96,6 @@ class Crawler():
         data = self.ep.encrypted_request(params)
         resp = self.session.post(url, data=data, timeout=self.timeout)
         result = resp.json()
-        # pprint(result)
         if result['code'] != 200:
             click.echo('post_request error')
         else:
@@ -152,28 +151,20 @@ class Crawler():
 
 
         lyricUrl = 'http://music.163.com/api/song/lyric/?id={}&lv=-1&csrf_token={}'.format(song_id, csrf)
-        # print("lyricUrl = {}".format(lyricUrl))
         lyricResponse = self.session.get(lyricUrl)
         lyricJSON = lyricResponse.json()
-        # pprint(lyricResponse.json())
         lyrics = lyricJSON['lrc']['lyric'].split("\n")
-        # pprint(lyrics)
         lyricList = []
         for word in lyrics:
             time = word[1:6]
             name = word[11:]
-            # print(word)
-            # print(time)
-            # print(name)
             p = Node(time, name)
             lyricList.append(p)
         json_string = json.dumps([node.__dict__ for node in lyricList], ensure_ascii = False, indent = 4)
-        # pprint(json_string)
 
         if not os.path.exists(folder):
             os.makedirs(folder)
         fpath = os.path.join(folder, str(song_num) + '_' + song_name + '.json')
-        # print("fpath = {}".format(fpath))
         text_file = open(fpath, "w")
         n = text_file.write(json_string)
         text_file.close()
@@ -274,4 +265,4 @@ if __name__ == '__main__':
         for song_num, song_name in enumerate(music_list):
             netease.download_song_by_search(song_name,song_num + 1)
     else:
-        click.echo('music_list.txt not exist.')
+        click.echo('下载配置文件不存在')
