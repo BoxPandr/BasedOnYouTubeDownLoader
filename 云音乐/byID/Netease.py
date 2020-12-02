@@ -96,7 +96,6 @@ class Crawler():
         data = self.ep.encrypted_request(params)
         resp = self.session.post(url, data=data, timeout=self.timeout)
         result = resp.json()
-        # pprint(result)
         if result['code'] != 200:
             click.echo('post_request error')
         else:
@@ -109,32 +108,21 @@ class Crawler():
         :params bit_rate: {'MD 128k': 128000, 'HD 320k': 320000}
         :return: 歌曲下载地址
         """
-        print(23)
         csrf = ''
         lyricUrl = 'http://music.163.com/api/song/lyric/?id={}&lv=-1&csrf_token={}'.format(song_id, csrf)
-        # print("lyricUrl = {}".format(lyricUrl))
         lyricResponse = self.session.get(lyricUrl)
         lyricJSON = lyricResponse.json()
-        pprint(lyricResponse.json())
         lyrics = lyricJSON['lrc']['lyric'].split("\n")
-        pprint(lyrics)
         lyricList = []
-        print(213)
         for word in lyrics:
             time = word[1:6]
             name = word[11:]
-            # print(word)
-            # print(time)
-            # print(name)
             p = Node(time, name)
             lyricList.append(p)
         json_string = json.dumps([node.__dict__ for node in lyricList], ensure_ascii = False, indent = 4)
-        # pprint(json_string)
-        print(21113)
         if not os.path.exists(folder):
             os.makedirs(folder)
         fpath = os.path.join(folder, str(song_num) + '_' + song_name + '.json')
-        # print("fpath = {}".format(fpath))
         text_file = open(fpath, "w")
         text_file.write(json_string)
         text_file.close()
@@ -147,10 +135,7 @@ class Crawler():
 
 
         # 歌曲下载地址
-        print(1123)
         song_url = result['data'][0]['url']
-        # pprint(result)
-        # 歌曲不存在
         if song_url is None:
             click.echo('Song {} is not available due to copyright issue.'.format(song_id))
         else:
@@ -174,7 +159,6 @@ class Crawler():
                 fpath = os.path.join(folder, str(song_num) + '_' + valid_name + '.mp3')
         
         if not os.path.exists(fpath):
-            print(song_url)
             resp = self.download_session.get(song_url, timeout=self.timeout, stream=True)
             length = int(resp.headers.get('content-length'))
             label = 'Downloading {} {}kb'.format(song_name, int(length/1024))
@@ -212,7 +196,6 @@ class Netease():
         songInfoResponse = self.crawler.session.get(songInfoUrl)
         songInfoJSON = songInfoResponse.json()
         song_name = songInfoJSON['songs'][0]["name"]
-        # pprint(song_name)
 
         try:
             url = self.crawler.get_song_url(song_id, 320000, folder, song_num, song_name)
