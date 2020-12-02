@@ -5,7 +5,6 @@ from http import cookiejar
 
 from pprint import pprint
 
-
 from dataclasses import dataclass
 
 
